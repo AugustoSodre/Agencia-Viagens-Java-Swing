@@ -2,24 +2,19 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.RenderingHints;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -95,19 +90,19 @@ public class CadastrarCliente extends JFrame {
         txtDocumento = createModernTextField(15, "Digite o CPF no formato 000.000.000-00");
 
         // Radio buttons modernos
-        rbNacional = createModernRadioButton("🇧🇷 Nacional", true);
-        rbEstrangeiro = createModernRadioButton("🌍 Estrangeiro", false);
+        rbNacional = createModernRadioButton("Nacional", true);
+        rbEstrangeiro = createModernRadioButton("Estrangeiro", false);
         grupTipo = new ButtonGroup();
         grupTipo.add(rbNacional);
         grupTipo.add(rbEstrangeiro);
 
         // Label do documento
-        lblDocumento = createModernLabel("📄 CPF:*");
+        lblDocumento = createModernLabel("CPF:*");
 
         // Botões modernos
-        btnSalvar = createModernButton("💾 Salvar", SUCCESS_COLOR, "Salvar o cliente no sistema");
-        btnLimpar = createModernButton("🧹 Limpar", WARNING_COLOR, "Limpar todos os campos");
-        btnCancelar = createModernButton("❌ Cancelar", DANGER_COLOR, "Cancelar e fechar a janela");
+        btnSalvar = createModernButton("Salvar", SUCCESS_COLOR, "Salvar o cliente no sistema");
+        btnLimpar = createModernButton("Limpar", WARNING_COLOR, "Limpar todos os campos");
+        btnCancelar = createModernButton("Cancelar", DANGER_COLOR, "Cancelar e fechar a janela");
 
         // Tamanho padrão dos botões
         Dimension btnSize = new Dimension(140, 40);
@@ -224,7 +219,7 @@ public class CadastrarCliente extends JFrame {
                 BorderFactory.createLineBorder(PRIMARY_COLOR, 2, true),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
             ),
-            "👤 Dados do Cliente",
+            "Dados do Cliente",
             TitledBorder.LEFT,
             TitledBorder.TOP,
             new Font("Segoe UI", Font.BOLD, 16),
@@ -238,25 +233,25 @@ public class CadastrarCliente extends JFrame {
 
         // Nome
         gbc.gridx = 0; gbc.gridy = 0;
-        panel.add(createModernLabel("👤 Nome:*"), gbc);
+        panel.add(createModernLabel("Nome:*"), gbc);
         gbc.gridx = 1; gbc.gridwidth = 2; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(txtNome, gbc);
 
         // Telefone
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 1; gbc.fill = GridBagConstraints.NONE;
-        panel.add(createModernLabel("📞 Telefone:*"), gbc);
+        panel.add(createModernLabel("Telefone:*"), gbc);
         gbc.gridx = 1; gbc.gridwidth = 2; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(txtTelefone, gbc);
 
         // Email
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 1; gbc.fill = GridBagConstraints.NONE;
-        panel.add(createModernLabel("📧 Email:*"), gbc);
+        panel.add(createModernLabel("Email:*"), gbc);
         gbc.gridx = 1; gbc.gridwidth = 2; gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(txtEmail, gbc);
 
         // Tipo de cliente
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 1; gbc.fill = GridBagConstraints.NONE;
-        panel.add(createModernLabel("🏠 Tipo:*"), gbc);
+        panel.add(createModernLabel("Tipo:*"), gbc);
 
         JPanel painelTipo = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         painelTipo.setBackground(Color.WHITE);
@@ -287,13 +282,13 @@ public class CadastrarCliente extends JFrame {
 
     private void setupEvents() {
         rbNacional.addActionListener(e -> {
-            lblDocumento.setText("📄 CPF:*");
+            lblDocumento.setText("CPF:*");
             txtDocumento.setToolTipText("Digite o CPF no formato 000.000.000-00");
             animateFieldChange(txtDocumento);
         });
 
         rbEstrangeiro.addActionListener(e -> {
-            lblDocumento.setText("🛂 Passaporte:*");
+            lblDocumento.setText("Passaporte:*");
             txtDocumento.setToolTipText("Digite o número do passaporte (6-9 caracteres alfanuméricos)");
             animateFieldChange(txtDocumento);
         });
@@ -357,7 +352,7 @@ public class CadastrarCliente extends JFrame {
         }
 
         if (!controller.validarCliente(nome, telefone, email, documento, isNacional)) {
-            showModernMessage("⚠️ Dados inválidos! Verifique os campos preenchidos.", 
+            showModernMessage("Dados inválidos! Verifique os campos preenchidos.", 
                             "Validação", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -375,36 +370,36 @@ public class CadastrarCliente extends JFrame {
 
     private boolean validarCampos() {
         if (txtNome.getText().trim().isEmpty()) {
-            showValidation("❌ O campo Nome é obrigatório!", txtNome);
+            showValidation("O campo Nome é obrigatório!", txtNome);
             return false;
         }
         if (txtTelefone.getText().trim().isEmpty()) {
-            showValidation("❌ O campo Telefone é obrigatório!", txtTelefone);
+            showValidation("O campo Telefone é obrigatório!", txtTelefone);
             return false;
         }
         String email = txtEmail.getText().trim();
         if (email.isEmpty()) {
-            showValidation("❌ O campo Email é obrigatório!", txtEmail);
+            showValidation("O campo Email é obrigatório!", txtEmail);
             return false;
         }
         if (!email.matches("^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$")) {
-            showValidation("❌ Por favor, digite um email válido!", txtEmail);
+            showValidation("Por favor, digite um email válido!", txtEmail);
             return false;
         }
         String documento = txtDocumento.getText().trim();
         if (documento.isEmpty()) {
             String tipoDoc = rbNacional.isSelected() ? "CPF" : "Passaporte";
-            showValidation("❌ O campo " + tipoDoc + " é obrigatório!", txtDocumento);
+            showValidation("O campo " + tipoDoc + " é obrigatório!", txtDocumento);
             return false;
         }
         if (rbNacional.isSelected()) {
             if (!documento.matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")) {
-                showValidation("❌ CPF deve estar no formato 000.000.000-00!", txtDocumento);
+                showValidation("CPF deve estar no formato 000.000.000-00!", txtDocumento);
                 return false;
             }
         } else {
             if (!documento.matches("^[A-Za-z0-9]{6,9}$")) {
-                showValidation("❌ Passaporte deve conter de 6 a 9 caracteres alfanuméricos!", txtDocumento);
+                showValidation("Passaporte deve conter de 6 a 9 caracteres alfanuméricos!", txtDocumento);
                 return false;
             }
         }
@@ -412,7 +407,7 @@ public class CadastrarCliente extends JFrame {
     }
 
     private void showValidation(String msg, JTextField field) {
-        showModernMessage(msg, "⚠️ Validação", JOptionPane.WARNING_MESSAGE);
+        showModernMessage(msg, "Validação", JOptionPane.WARNING_MESSAGE);
         SwingUtilities.invokeLater(() -> {
             field.requestFocusInWindow();
             // Destacar campo com erro
@@ -433,7 +428,7 @@ public class CadastrarCliente extends JFrame {
         txtEmail.setText("");
         txtDocumento.setText("");
         rbNacional.setSelected(true);
-        lblDocumento.setText("📄 CPF:*");
+        lblDocumento.setText("CPF:*");
         txtNome.requestFocus();
         
         // Resetar bordas dos campos

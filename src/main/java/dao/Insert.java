@@ -28,8 +28,9 @@ public class Insert {
                 stmt.setString(3, cliente.getEmail());
                 stmt.setString(4, cliente.getTipo());
                 stmt.setString(5, cliente.getPassaporte());
-         
-                JOptionPane.showMessageDialog(null, "Cliente estrangeiro inserido com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                int linhasAfetadas = stmt.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Cliente estrangeiro inserido com sucesso!\nLinhas Afetadas: " + linhasAfetadas, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao inserir cliente estrangeiro: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -48,7 +49,7 @@ public class Insert {
                 stmt.setString(5, cliente.getCPF());
 
                 int linhasAfetadas = stmt.executeUpdate();
-                System.out.println("Cliente nacional inserido com sucesso!" + "Linhas afetadas: " + linhasAfetadas);
+                JOptionPane.showMessageDialog(null, "Cliente nacional inserido com sucesso!\nLinhas Afetadas: " + linhasAfetadas, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception e) {
                 System.err.println("Erro ao inserir cliente nacional: " + e.getMessage());
@@ -75,11 +76,10 @@ public class Insert {
             stmt.setString(6, pacote.getDescricao());
 
             int linhasAfetadas = stmt.executeUpdate();
-            System.out.println(" Pacote inserido com sucesso!" + "Linhas afetadas: " + linhasAfetadas);
+            JOptionPane.showMessageDialog(null, "Pacote inserido com sucesso!\nLinhas afetadas: " + linhasAfetadas, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
-            System.err.println("Erro ao inserir pacote: " + e.getMessage());
-			
+            JOptionPane.showMessageDialog(null, "Erro ao inserir pacote: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -98,10 +98,10 @@ public class Insert {
             stmt.setDate(3, dataContratacao);
 
             int linhasAfetadas = stmt.executeUpdate();
-            System.out.println("Pedido inserido com sucesso!" + "Linhas afetadas: " + linhasAfetadas);
+            JOptionPane.showMessageDialog(null, "Pedido inserido com sucesso!\nLinhas afetadas: " + linhasAfetadas, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
-            System.err.println("Erro ao inserir pedido: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao inserir pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -118,10 +118,10 @@ public class Insert {
             stmt.setDouble(3, servico.getPreco());
 
             int linhasAfetadas = stmt.executeUpdate();
-            System.out.println("Serviço inserido com sucesso!" + "Linhas afetadas: " + linhasAfetadas);
+            JOptionPane.showMessageDialog(null, "Serviço inserido com sucesso!\nLinhas afetadas: " + linhasAfetadas, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (Exception e) {
-            System.err.println("Erro ao inserir serviço: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao inserir serviço: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

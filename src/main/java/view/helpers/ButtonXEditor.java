@@ -11,6 +11,9 @@ import javax.swing.table.DefaultTableModel;
 
 import dao.SelectAll;
 import dao.deletes.DeleteCliente;
+import dao.deletes.DeletePacote;
+import dao.deletes.DeletePedido;
+import dao.deletes.DeleteServico;
 
 public class ButtonXEditor extends DefaultCellEditor {
     private JButton button;
@@ -18,14 +21,14 @@ public class ButtonXEditor extends DefaultCellEditor {
     private DefaultTableModel model;
     private int selectedRow;
 
-    public ButtonXEditor(JCheckBox checkBox, DefaultTableModel model, JTable table, AbstractTela<?> tela) {
+    public ButtonXEditor(JCheckBox checkBox, DefaultTableModel model, JTable table, AbstractTela<?> tela, String tipo) {
         super(checkBox);
         this.table = table;
         this.model = model;
 
         button = new JButton("X");
         button.setForeground(Color.RED);
-        button.addActionListener(e -> deleteRow(tela));
+        button.addActionListener(e -> deleteRow(tela, tipo));
     }
 
     @Override
@@ -35,11 +38,27 @@ public class ButtonXEditor extends DefaultCellEditor {
         return button;
     }
 
-    private void deleteRow(AbstractTela<?> tela) {
-        int idCliente = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
+    private void deleteRow(AbstractTela<?> tela, String tipo) {
+        int id = Integer.parseInt(table.getValueAt(selectedRow, 0).toString());
 
         // Chama DAO para deletar do banco
-        DeleteCliente.delete(idCliente);
+        switch (tipo.toLowerCase()) {
+			case "cliente":
+				DeleteCliente.delete(id);
+				break;
+			case "pacote":
+				DeletePacote.delete(id);
+				break;
+			case "pedido":
+				DeletePedido.delete(id);
+				break;
+			case "servico":
+				DeleteServico.delete(id);
+				break;
+			default:
+				throw new IllegalArgumentException("Tipo desconhecido: " + tipo);
+		}
+        
 
         // Query novamente
         tela.reloadData();

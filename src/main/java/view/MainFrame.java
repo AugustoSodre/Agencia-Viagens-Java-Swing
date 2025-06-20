@@ -80,9 +80,12 @@ public class MainFrame extends JFrame {
 
         Menu menu = new Menu(this);
         TelaCliente telaCliente = new TelaCliente(this);
+        TelaPacote telaPacote = new TelaPacote(this);
+        
 
         container.add(menu, "menu");
         container.add(telaCliente, "telaCliente");
+        container.add(telaPacote, "telaPacote");
 
         add(container);
         setVisible(true);

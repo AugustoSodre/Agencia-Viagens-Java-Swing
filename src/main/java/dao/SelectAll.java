@@ -19,7 +19,7 @@ public class SelectAll {
                 query = "SELECT * FROM cliente";
                 break;
             case "pacote":
-                query = "SELECT * FROM pacote";
+                query = "SELECT * FROM pacote_viagem";
                 break;
             case "pedido":
                 query = "SELECT * FROM pedido";

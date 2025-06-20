@@ -4,9 +4,6 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -34,25 +31,20 @@ public class Menu extends JPanel {
 
         // Ações dos botões
         btnClientes.addActionListener(e -> {
-            // Exemplo de navegação para outra tela
         	mainFrame.mostrarTela("telaCliente");
         	
         });
 
         btnPacotes.addActionListener(e -> {
-            // Exemplo de navegação para outra tela
-            // mainFrame.mostrarTela("telaPacotes");
-            JOptionPane.showMessageDialog(this, "Abrir tela de Pacotes (placeholder)");
+            mainFrame.mostrarTela("telaPacote");
         });
 
         btnServicos.addActionListener(e -> {
-            // Exemplo de navegação para outra tela
             // mainFrame.mostrarTela("telaServicos");
             JOptionPane.showMessageDialog(this, "Abrir tela de Serviços (placeholder)");
         });
 
         btnPedidos.addActionListener(e -> {
-            // Exemplo de navegação para outra tela
             // mainFrame.mostrarTela("telaPedidos");
             JOptionPane.showMessageDialog(this, "Abrir tela de Pedidos (placeholder)");
         });

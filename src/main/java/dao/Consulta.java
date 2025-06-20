@@ -21,7 +21,7 @@ public class Consulta {
                 break;
 
             case "pacote":
-                query = "SELECT * FROM pacote WHERE id_pacote = ?";
+                query = "SELECT * FROM pacote_viagem WHERE id_pacote = ?";
                 break;
 
             case "pedido":
