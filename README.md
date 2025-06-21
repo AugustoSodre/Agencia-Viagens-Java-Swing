@@ -1,8 +1,8 @@
 # Agência de Viagens - Java Swing
 
 Alunos
-- Augusto Sodré
-- Guilherme Ilhas
+- Augusto Sodré   -> 22400555
+- Guilherme Ilhas -> 22251440
 
 Este projeto é um sistema de gerenciamento para uma agência de viagens, desenvolvido em Java utilizando a biblioteca Swing para a interface gráfica. O sistema permite o cadastro e gerenciamento de clientes, pacotes de viagem, pedidos e serviços.
 
