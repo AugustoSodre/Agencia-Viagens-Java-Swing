@@ -32,7 +32,6 @@ public class Menu extends JPanel {
         // Ações dos botões
         btnClientes.addActionListener(e -> {
         	mainFrame.mostrarTela("telaCliente");
-        	
         });
 
         btnPacotes.addActionListener(e -> {
@@ -40,13 +39,11 @@ public class Menu extends JPanel {
         });
 
         btnServicos.addActionListener(e -> {
-            // mainFrame.mostrarTela("telaServicos");
-            JOptionPane.showMessageDialog(this, "Abrir tela de Serviços (placeholder)");
+            mainFrame.mostrarTela("telaServico");
         });
 
         btnPedidos.addActionListener(e -> {
-            // mainFrame.mostrarTela("telaPedidos");
-            JOptionPane.showMessageDialog(this, "Abrir tela de Pedidos (placeholder)");
+            mainFrame.mostrarTela("telaPedido");
         });
         
         JLabel lblNewLabel = new JLabel("Sistema de Gerenciamento");

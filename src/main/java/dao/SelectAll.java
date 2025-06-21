@@ -22,7 +22,24 @@ public class SelectAll {
                 query = "SELECT * FROM pacote_viagem";
                 break;
             case "pedido":
-                query = "SELECT * FROM pedido";
+                query = "SELECT " +
+                        "p.id_pedido AS 'ID', " +
+                        "DATE_FORMAT(p.data_contratacao, '%d/%m/%Y') AS 'Data', " +
+                        "c.nome AS 'Cliente', " +
+                        "c.email AS 'Email', " +
+                        "c.telefone AS 'Telefone', " +
+                        "pv.nome AS 'Pacote', " +
+                        "pv.destino AS 'Destino', " +
+                        "pv.preco AS 'Valor Pacote', " +
+                        "GROUP_CONCAT(sa.nome SEPARATOR ', ') AS 'Serviços', " +
+                        "(pv.preco + COALESCE(SUM(sa.preco),0)) AS 'Valor Total' " +
+                        "FROM pedido p " +
+                        "INNER JOIN cliente c ON p.id_cliente = c.id_cliente " +
+                        "INNER JOIN pacote_viagem pv ON p.id_pacote = pv.id_pacote " +
+                        "LEFT JOIN pedido_servico ps ON p.id_pedido = ps.id_pedido " +
+                        "LEFT JOIN servico_adicional sa ON ps.id_servico = sa.id_servico " +
+                        "GROUP BY p.id_pedido " +
+                        "ORDER BY p.id_pedido ASC";
                 break;
             case "servico":
                 query = "SELECT * FROM servico_adicional";

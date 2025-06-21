@@ -124,4 +124,23 @@ public class Insert {
             JOptionPane.showMessageDialog(null, "Erro ao inserir serviço: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    // Método para inserir relação Pedido-Serviço
+    public static void inserirPedidoServico(int id_pedido, int id_servico) {
+        String sql = "INSERT INTO pedido_servico (id_pedido, id_servico) VALUES (?, ?)";
+
+        try (
+            Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, id_pedido);
+            stmt.setInt(2, id_servico);
+
+            int linhasAfetadas = stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Serviço vinculado ao pedido com sucesso!\nLinhas afetadas: " + linhasAfetadas, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao vincular serviço ao pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

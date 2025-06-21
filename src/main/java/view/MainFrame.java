@@ -2,7 +2,7 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
-
+    
 public class MainFrame extends JFrame {
     CardLayout cardLayout;
     JPanel container;
@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
         setJMenuBar(menuBar);
 
         setTitle("Sistema de Gerenciamento da Agência de Viagens");
-        setSize(1080, 720);
+        setSize(1324, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -81,11 +81,15 @@ public class MainFrame extends JFrame {
         Menu menu = new Menu(this);
         TelaCliente telaCliente = new TelaCliente(this);
         TelaPacote telaPacote = new TelaPacote(this);
+        TelaServico telaServico = new TelaServico(this);
+        TelaPedido telaPedido = new TelaPedido(this);
         
 
         container.add(menu, "menu");
         container.add(telaCliente, "telaCliente");
         container.add(telaPacote, "telaPacote");
+        container.add(telaServico, "telaServico");
+        container.add(telaPedido, "telaPedido");
 
         add(container);
         setVisible(true);

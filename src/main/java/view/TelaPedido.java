@@ -5,29 +5,29 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.*;
 import javax.swing.table.*;
-import control.PacoteController;
+import control.PedidoController;
 import dao.SelectAll;
 import view.helpers.AbstractTela;
 import view.helpers.ButtonXEditor;
 import view.helpers.ButtonXRenderer;
 
-public class TelaPacote extends AbstractTela<Object> {
+public class TelaPedido extends AbstractTela<Object> {
     private MainFrame mainFrame;
     private JTextField idSearchField;
     private JButton idSearchButton;
     private JButton refreshButton;
     private JLabel statusLabel;
-    private PacoteController pacoteController = new PacoteController();
+    private PedidoController pedidoController = new PedidoController();
 
-    private static final Color PRIMARY_COLOR = new Color(98, 111, 71);
+    private static final Color PRIMARY_COLOR = new Color(41, 128, 185);
     private static final Color SUCCESS_COLOR = new Color(39, 174, 96);
     private static final Color WARNING_COLOR = new Color(241, 196, 15);
     private static final Color DANGER_COLOR = new Color(231, 76, 60);
     private static final Color LIGHT_GRAY = new Color(248, 249, 250);
     private static final Color DARK_GRAY = new Color(52, 58, 64);
 
-    public TelaPacote(MainFrame mainFrame) {
-        super("Pacotes");
+    public TelaPedido(MainFrame mainFrame) {
+        super("Pedidos");
         this.mainFrame = mainFrame;
         setupModernUI();
         addSearchComponents();
@@ -47,7 +47,7 @@ public class TelaPacote extends AbstractTela<Object> {
     @Override
     protected DefaultTableModel createTableModel() {
         SelectAll selectAll = new SelectAll();
-        DefaultTableModel model = selectAll.listarTodosComoTableModel("pacote");
+        DefaultTableModel model = selectAll.listarTodosComoTableModel("pedido");
         if (model != null) {
             model.addColumn("Ações");
             updateStatusLabel(model.getRowCount());
@@ -89,18 +89,15 @@ public class TelaPacote extends AbstractTela<Object> {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         table.getColumn("Ações").setCellRenderer(new ButtonXRenderer());
-        table.getColumn("Ações").setCellEditor(new ButtonXEditor(new JCheckBox(), model, table, this, "pacote"));
-        int[] larguras = {60, 150, 120, 200, 100, 100, 350};
-        for (int i = 0; i < larguras.length && i < table.getColumnModel().getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setPreferredWidth(larguras[i]);
-        }
+        table.getColumn("Ações").setCellEditor(new ButtonXEditor(new JCheckBox(), model, table, this, "pedido"));
+        // Ajuste de largura das colunas conforme necessário
     }
 
     @Override
     protected void onAddClicked(java.awt.event.ActionEvent e) {
         JButton source = (JButton) e.getSource();
         animateButtonClick(source);
-        new CadastrarPacote(this).setVisible(true);
+        new CadastrarPedido(this).setVisible(true);
     }
 
     private void animateButtonClick(JButton button) {
@@ -113,17 +110,17 @@ public class TelaPacote extends AbstractTela<Object> {
 
     @Override
     protected String getAddButtonText() {
-        return "Novo Pacote";
+        return "Novo Pedido";
     }
 
     @Override
     protected String getSearchTooltip() {
-        return "Digite para buscar por nome, destino ou tipo";
+        return "Digite para buscar por cliente, pacote ou data";
     }
 
     @Override
     protected String getAddButtonTooltip() {
-        return "Adicionar um novo pacote ao sistema";
+        return "Adicionar um novo pedido ao sistema";
     }
 
     @Override
@@ -175,6 +172,14 @@ public class TelaPacote extends AbstractTela<Object> {
         JPanel modernSearchPanel = createModernSearchPanel();
         searchPanel.add(Box.createHorizontalStrut(15));
         searchPanel.add(modernSearchPanel);
+
+        // Adicione o botão aqui
+        JButton btnVincularServico = createModernButton("Vincular Serviço", PRIMARY_COLOR);
+        btnVincularServico.setToolTipText("Vincular um serviço a um pedido existente");
+        btnVincularServico.addActionListener(e -> new CadastrarPedidoServico(this).setVisible(true));
+        searchPanel.add(Box.createHorizontalStrut(10));
+        searchPanel.add(btnVincularServico);
+
         statusLabel = new JLabel("Carregando...");
         statusLabel.setFont(new Font("Segoe UI", Font.ITALIC, 11));
         statusLabel.setForeground(DARK_GRAY);
@@ -295,22 +300,22 @@ public class TelaPacote extends AbstractTela<Object> {
             idSearchField.requestFocus();
             return;
         }
-        statusLabel.setText("Buscando pacote ID " + idText + "...");
+        statusLabel.setText("Buscando pedido ID " + idText + "...");
         statusLabel.setForeground(PRIMARY_COLOR);
 
         int id = Integer.parseInt(idText);
-        DefaultTableModel model = pacoteController.buscarPacotePorId(id);
+        DefaultTableModel model = pedidoController.buscarPedidoPorId(id);
 
         if (model != null && model.getRowCount() > 0) {
             model.addColumn("Ações");
             table.setModel(filterModel(model));
             customizeTable(table);
-            statusLabel.setText("Pacote encontrado!");
+            statusLabel.setText("Pedido encontrado!");
             statusLabel.setForeground(SUCCESS_COLOR);
         } else {
-            statusLabel.setText("Pacote não encontrado");
+            statusLabel.setText("Pedido não encontrado");
             statusLabel.setForeground(DANGER_COLOR);
-            showModernMessage("Nenhum pacote encontrado com o ID " + id,
+            showModernMessage("Nenhum pedido encontrado com o ID " + id,
                             "Busca sem resultados", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -321,7 +326,7 @@ public class TelaPacote extends AbstractTela<Object> {
 
     private void updateStatusLabel(int recordCount) {
         if (statusLabel != null) {
-            statusLabel.setText(recordCount + " pacote" + (recordCount != 1 ? "s" : "") + " encontrado" + (recordCount != 1 ? "s" : ""));
+            statusLabel.setText(recordCount + " pedido" + (recordCount != 1 ? "s" : "") + " encontrado" + (recordCount != 1 ? "s" : ""));
             statusLabel.setForeground(DARK_GRAY);
         }
     }

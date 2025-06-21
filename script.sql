@@ -133,29 +133,3 @@ VALUES
 (12, 4), (12, 5),
 (13, 2), (13, 8), (13, 10);
 
-
-/*
--- QUERY com JOINs para tela de pedidos com informações principais
-SELECT 
-    p.id_pedido,
-    p.data_contratacao,
-    c.nome AS nome_cliente,
-    c.email AS email_cliente,
-    c.telefone AS telefone_cliente,
-    c.tipo AS tipo_cliente,
-    pv.nome AS nome_pacote,
-    pv.destino,
-    pv.duracao_dias,
-    pv.preco AS preco_pacote,
-    pv.tipo AS tipo_pacote,
-    GROUP_CONCAT(sa.nome SEPARATOR ', ') AS servicos_adicionais,
-    SUM(sa.preco) AS valor_servicos_adicionais,
-    (pv.preco + COALESCE(SUM(sa.preco), 0)) AS valor_total_pedido
-FROM pedido p
-INNER JOIN cliente c ON p.id_cliente = c.id_cliente
-INNER JOIN pacote_viagem pv ON p.id_pacote = pv.id_pacote
-LEFT JOIN pedido_servico ps ON p.id_pedido = ps.id_pedido
-LEFT JOIN servico_adicional sa ON ps.id_servico = sa.id_servico
-GROUP BY p.id_pedido, p.data_contratacao, c.nome, c.email, c.telefone, c.tipo, 
-         pv.nome, pv.destino, pv.duracao_dias, pv.preco, pv.tipo
-ORDER BY p.data_contratacao DESC;
