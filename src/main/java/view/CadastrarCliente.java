@@ -43,15 +43,15 @@ public class CadastrarCliente extends JFrame {
     private TelaCliente telaCliente;
     private ClienteController controller = new ClienteController();
 
-    // Cores modernas - mesmas da TelaCliente
-    private static final Color PRIMARY_COLOR = new Color(41, 128, 185);
-    private static final Color SECONDARY_COLOR = new Color(52, 152, 219);
-    private static final Color SUCCESS_COLOR = new Color(39, 174, 96);
-    private static final Color WARNING_COLOR = new Color(241, 196, 15);
-    private static final Color DANGER_COLOR = new Color(231, 76, 60);
-    private static final Color LIGHT_GRAY = new Color(248, 249, 250);
-    private static final Color DARK_GRAY = new Color(52, 58, 64);
-    private static final Color ACCENT_COLOR = new Color(155, 89, 182);
+    // Nova paleta de cores elegante
+    private static final Color PRIMARY = new Color(150, 60, 70);      // #963C46
+    private static final Color SECONDARY = new Color(225, 188, 190);  // #E1BCBE
+    private static final Color BACKGROUND = new Color(255, 245, 238); // #FFF5EE
+    private static final Color TEXT = new Color(45, 45, 45);          // #2D2D2D
+    private static final Color SUCCESS = new Color(71, 191, 145);     // #47BF91
+    private static final Color WARNING = new Color(255, 127, 80);     // #FF7F50
+    private static final Color ERROR = new Color(192, 57, 43);        // #C0392B
+    private static final Color BORDER = new Color(217, 217, 217);         // #D9D9D9
 
     public CadastrarCliente(TelaCliente telaCliente) {
         this.telaCliente = telaCliente;
@@ -69,7 +69,7 @@ public class CadastrarCliente extends JFrame {
 
     private void setupModernUI() {
         // Aplicar tema moderno
-        setBackground(LIGHT_GRAY);
+        setBackground(BACKGROUND);
         
         // Configurar fontes globais
         Font bodyFont = new Font("Segoe UI", Font.PLAIN, 13);
@@ -100,9 +100,9 @@ public class CadastrarCliente extends JFrame {
         lblDocumento = createModernLabel("CPF:*");
 
         // Botões modernos
-        btnSalvar = createModernButton("Salvar", SUCCESS_COLOR, "Salvar o cliente no sistema");
-        btnLimpar = createModernButton("Limpar", WARNING_COLOR, "Limpar todos os campos");
-        btnCancelar = createModernButton("Cancelar", DANGER_COLOR, "Cancelar e fechar a janela");
+        btnSalvar = createModernButton("Salvar", SUCCESS, "Salvar o cliente no sistema");
+        btnLimpar = createModernButton("Limpar", WARNING, "Limpar todos os campos");
+        btnCancelar = createModernButton("Cancelar", ERROR, "Cancelar e fechar a janela");
 
         // Tamanho padrão dos botões
         Dimension btnSize = new Dimension(140, 40);
@@ -114,9 +114,9 @@ public class CadastrarCliente extends JFrame {
     private JTextField createModernTextField(int columns, String tooltip) {
         JTextField field = new JTextField(columns);
         field.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        field.setForeground(DARK_GRAY);
+        field.setForeground(TEXT);
         field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+            BorderFactory.createLineBorder(BORDER, 1, true),
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
         field.setPreferredSize(new Dimension(field.getPreferredSize().width, 36));
@@ -127,7 +127,7 @@ public class CadastrarCliente extends JFrame {
             @Override
             public void focusGained(FocusEvent e) {
                 field.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(PRIMARY_COLOR, 2, true),
+                    BorderFactory.createLineBorder(PRIMARY, 2, true),
                     BorderFactory.createEmptyBorder(7, 12, 7, 12)
                 ));
             }
@@ -135,7 +135,7 @@ public class CadastrarCliente extends JFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 field.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+                    BorderFactory.createLineBorder(BORDER, 1, true),
                     BorderFactory.createEmptyBorder(8, 12, 8, 12)
                 ));
             }
@@ -147,7 +147,7 @@ public class CadastrarCliente extends JFrame {
     private JRadioButton createModernRadioButton(String text, boolean selected) {
         JRadioButton rb = new JRadioButton(text, selected);
         rb.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        rb.setForeground(DARK_GRAY);
+        rb.setForeground(TEXT);
         rb.setBackground(Color.WHITE);
         rb.setFocusPainted(false);
         rb.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -161,7 +161,7 @@ public class CadastrarCliente extends JFrame {
     private JLabel createModernLabel(String text) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        label.setForeground(DARK_GRAY);
+        label.setForeground(TEXT);
         return label;
     }
 
@@ -194,7 +194,7 @@ public class CadastrarCliente extends JFrame {
         
         // Painel principal com fundo moderno
         JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.setBackground(LIGHT_GRAY);
+        painelPrincipal.setBackground(BACKGROUND);
         painelPrincipal.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         // Painel do formulário com design moderno
@@ -216,14 +216,14 @@ public class CadastrarCliente extends JFrame {
         // Border moderna com título estilizado
         TitledBorder border = new TitledBorder(
             BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(PRIMARY_COLOR, 2, true),
+                BorderFactory.createLineBorder(PRIMARY, 2, true),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
             ),
             "Dados do Cliente",
             TitledBorder.LEFT,
             TitledBorder.TOP,
             new Font("Segoe UI", Font.BOLD, 16),
-            PRIMARY_COLOR
+            PRIMARY
         );
         panel.setBorder(border);
 
@@ -271,7 +271,7 @@ public class CadastrarCliente extends JFrame {
 
     private JPanel createModernButtonPanel() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 20));
-        panel.setBackground(LIGHT_GRAY);
+        panel.setBackground(BACKGROUND);
         
         panel.add(btnSalvar);
         panel.add(btnLimpar);
@@ -324,15 +324,15 @@ public class CadastrarCliente extends JFrame {
     }
 
     private void animateFieldChange(JTextField field) {
-        Color originalBorder = PRIMARY_COLOR;
+        Color originalBorder = PRIMARY;
         field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(ACCENT_COLOR, 2, true),
+            BorderFactory.createLineBorder(WARNING, 2, true),
             BorderFactory.createEmptyBorder(7, 12, 7, 12)
         ));
         
         Timer timer = new Timer(300, evt -> {
             field.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+                BorderFactory.createLineBorder(BORDER, 1, true),
                 BorderFactory.createEmptyBorder(8, 12, 8, 12)
             ));
         });
@@ -412,7 +412,7 @@ public class CadastrarCliente extends JFrame {
             field.requestFocusInWindow();
             // Destacar campo com erro
             field.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(DANGER_COLOR, 2, true),
+                BorderFactory.createLineBorder(ERROR, 2, true),
                 BorderFactory.createEmptyBorder(7, 12, 7, 12)
             ));
         });
@@ -435,7 +435,7 @@ public class CadastrarCliente extends JFrame {
         JTextField[] campos = {txtNome, txtTelefone, txtEmail, txtDocumento};
         for (JTextField campo : campos) {
             campo.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+                BorderFactory.createLineBorder(BORDER, 1, true),
                 BorderFactory.createEmptyBorder(8, 12, 8, 12)
             ));
         }

@@ -7,12 +7,22 @@ public class MainFrame extends JFrame {
     CardLayout cardLayout;
     JPanel container;
 
+    // Nova paleta de cores elegante
+    private static final Color PRIMARY = new Color(150, 60, 70);      // #963C46
+    private static final Color SECONDARY = new Color(225, 188, 190);  // #E1BCBE
+    private static final Color BACKGROUND = new Color(255, 245, 238); // #FFF5EE
+    private static final Color TEXT = new Color(45, 45, 45);          // #2D2D2D
+    private static final Color SUCCESS = new Color(71, 191, 145);     // #47BF91
+    private static final Color WARNING = new Color(255, 127, 80);     // #FF7F50
+    private static final Color ERROR = new Color(192, 57, 43);        // #C0392B
+    private static final Color BORDER = new Color(217, 217, 217);         // #D9D9D9
+
     public MainFrame() {
         // Custom font for menu
         Font menuFont = new Font("Segoe UI", Font.BOLD, 16);
 
         JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(30, 144, 255)); // DodgerBlue
+        menuBar.setBackground(PRIMARY); // Marsala
         menuBar.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
 
         JMenu menuOpcoes = new JMenu("Opções");
@@ -22,17 +32,17 @@ public class MainFrame extends JFrame {
         JMenuItem retornarMenu = new JMenuItem("Retornar ao Menu", UIManager.getIcon("FileView.homeFolderIcon"));
         retornarMenu.setFont(menuFont);
         retornarMenu.setToolTipText("Voltar para o menu principal");
-        retornarMenu.setBackground(Color.WHITE);
+        retornarMenu.setBackground(BACKGROUND);
 
         JMenuItem sairItem = new JMenuItem("Sair", UIManager.getIcon("OptionPane.errorIcon"));
         sairItem.setFont(menuFont);
         sairItem.setToolTipText("Fechar o sistema");
-        sairItem.setBackground(Color.WHITE);
+        sairItem.setBackground(BACKGROUND);
 
         JMenuItem sobreItem = new JMenuItem("Sobre", UIManager.getIcon("FileView.computerIcon"));
         sobreItem.setFont(menuFont);
         sobreItem.setToolTipText("Informações sobre o sistema");
-        sobreItem.setBackground(Color.WHITE);
+        sobreItem.setBackground(BACKGROUND);
 
         retornarMenu.setAccelerator(KeyStroke.getKeyStroke("F1"));
         sairItem.setAccelerator(KeyStroke.getKeyStroke("ctrl Q"));

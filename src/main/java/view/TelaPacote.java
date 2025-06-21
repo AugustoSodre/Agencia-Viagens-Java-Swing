@@ -19,12 +19,15 @@ public class TelaPacote extends AbstractTela<Object> {
     private JLabel statusLabel;
     private PacoteController pacoteController = new PacoteController();
 
-    private static final Color PRIMARY_COLOR = new Color(98, 111, 71);
-    private static final Color SUCCESS_COLOR = new Color(39, 174, 96);
-    private static final Color WARNING_COLOR = new Color(241, 196, 15);
-    private static final Color DANGER_COLOR = new Color(231, 76, 60);
-    private static final Color LIGHT_GRAY = new Color(248, 249, 250);
-    private static final Color DARK_GRAY = new Color(52, 58, 64);
+    // Nova paleta de cores elegante
+    private static final Color PRIMARY = new Color(150, 60, 70);      // #963C46
+    private static final Color SECONDARY = new Color(225, 188, 190);  // #E1BCBE
+    private static final Color BACKGROUND = new Color(255, 245, 238); // #FFF5EE
+    private static final Color TEXT = new Color(45, 45, 45);          // #2D2D2D
+    private static final Color SUCCESS = new Color(71, 191, 145);     // #47BF91
+    private static final Color WARNING = new Color(255, 127, 80);     // #FF7F50
+    private static final Color ERROR = new Color(192, 57, 43);        // #C0392B
+    private static final Color BORDER = new Color(217, 217, 217);         // #D9D9D9
 
     public TelaPacote(MainFrame mainFrame) {
         super("Pacotes");
@@ -34,7 +37,7 @@ public class TelaPacote extends AbstractTela<Object> {
     }
 
     private void setupModernUI() {
-        setBackground(LIGHT_GRAY);
+        setBackground(BACKGROUND);
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         Font bodyFont = new Font("Segoe UI", Font.PLAIN, 13);
         UIManager.put("Button.font", bodyFont);
@@ -71,16 +74,16 @@ public class TelaPacote extends AbstractTela<Object> {
             }
         }
         table.setBackground(Color.WHITE);
-        table.setForeground(DARK_GRAY);
+        table.setForeground(TEXT);
         table.setSelectionBackground(new Color(230, 247, 255));
-        table.setSelectionForeground(DARK_GRAY);
+        table.setSelectionForeground(TEXT);
         table.setGridColor(new Color(230, 230, 230));
         table.setRowHeight(35);
         table.setShowGrid(true);
         table.setIntercellSpacing(new Dimension(1, 1));
         table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         JTableHeader header = table.getTableHeader();
-        header.setBackground(PRIMARY_COLOR);
+        header.setBackground(PRIMARY);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Segoe UI", Font.BOLD, 13));
         header.setPreferredSize(new Dimension(header.getPreferredSize().width, 40));
@@ -105,7 +108,7 @@ public class TelaPacote extends AbstractTela<Object> {
 
     private void animateButtonClick(JButton button) {
         Color originalColor = button.getBackground();
-        button.setBackground(SUCCESS_COLOR.brighter());
+        button.setBackground(SUCCESS.brighter());
         Timer timer = new Timer(100, evt -> button.setBackground(originalColor));
         timer.setRepeats(false);
         timer.start();
@@ -128,7 +131,7 @@ public class TelaPacote extends AbstractTela<Object> {
 
     @Override
     protected Icon getAddButtonIcon() {
-        return createModernIcon("+", SUCCESS_COLOR);
+        return createModernIcon("+", SUCCESS);
     }
 
     private Icon createModernIcon(String symbol, Color color) {
@@ -158,26 +161,26 @@ public class TelaPacote extends AbstractTela<Object> {
             customizeTable(table);
             showLoadingIndicator(false);
             statusLabel.setText("Dados atualizados • " + newModel.getRowCount() + " registros");
-            statusLabel.setForeground(SUCCESS_COLOR);
+            statusLabel.setForeground(SUCCESS);
         });
     }
 
     private void showLoadingIndicator(boolean show) {
         if (show) {
             statusLabel.setText("Carregando dados...");
-            statusLabel.setForeground(PRIMARY_COLOR);
+            statusLabel.setForeground(PRIMARY);
         }
     }
 
     private void addSearchComponents() {
         JPanel searchPanel = getSearchPanel();
-        searchPanel.setBackground(LIGHT_GRAY);
+        searchPanel.setBackground(BACKGROUND);
         JPanel modernSearchPanel = createModernSearchPanel();
         searchPanel.add(Box.createHorizontalStrut(15));
         searchPanel.add(modernSearchPanel);
         statusLabel = new JLabel("Carregando...");
         statusLabel.setFont(new Font("Segoe UI", Font.ITALIC, 11));
-        statusLabel.setForeground(DARK_GRAY);
+        statusLabel.setForeground(TEXT);
         searchPanel.add(Box.createHorizontalGlue());
         searchPanel.add(statusLabel);
         searchPanel.add(Box.createHorizontalStrut(15));
@@ -195,8 +198,8 @@ public class TelaPacote extends AbstractTela<Object> {
         idSearchField = createModernTextField();
         idSearchField.setPreferredSize(new Dimension(100, 32));
         idSearchField.setMaximumSize(new Dimension(100, 32));
-        idSearchButton = createModernButton("Buscar", PRIMARY_COLOR);
-        refreshButton = createModernButton("Limpar", WARNING_COLOR);
+        idSearchButton = createModernButton("Buscar", PRIMARY);
+        refreshButton = createModernButton("Limpar", WARNING);
 
         setupSearchEvents();
 
@@ -225,10 +228,10 @@ public class TelaPacote extends AbstractTela<Object> {
             public void focusGained(FocusEvent e) {
                 if (field.getText().equals("Digite o ID...")) {
                     field.setText("");
-                    field.setForeground(DARK_GRAY);
+                    field.setForeground(TEXT);
                 }
                 field.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
+                    BorderFactory.createLineBorder(PRIMARY, 2),
                     BorderFactory.createEmptyBorder(4, 8, 4, 8)
                 ));
             }
@@ -296,7 +299,7 @@ public class TelaPacote extends AbstractTela<Object> {
             return;
         }
         statusLabel.setText("Buscando pacote ID " + idText + "...");
-        statusLabel.setForeground(PRIMARY_COLOR);
+        statusLabel.setForeground(PRIMARY);
 
         int id = Integer.parseInt(idText);
         DefaultTableModel model = pacoteController.buscarPacotePorId(id);
@@ -306,10 +309,10 @@ public class TelaPacote extends AbstractTela<Object> {
             table.setModel(filterModel(model));
             customizeTable(table);
             statusLabel.setText("Pacote encontrado!");
-            statusLabel.setForeground(SUCCESS_COLOR);
+            statusLabel.setForeground(SUCCESS);
         } else {
             statusLabel.setText("Pacote não encontrado");
-            statusLabel.setForeground(DANGER_COLOR);
+            statusLabel.setForeground(ERROR);
             showModernMessage("Nenhum pacote encontrado com o ID " + id,
                             "Busca sem resultados", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -322,7 +325,7 @@ public class TelaPacote extends AbstractTela<Object> {
     private void updateStatusLabel(int recordCount) {
         if (statusLabel != null) {
             statusLabel.setText(recordCount + " pacote" + (recordCount != 1 ? "s" : "") + " encontrado" + (recordCount != 1 ? "s" : ""));
-            statusLabel.setForeground(DARK_GRAY);
+            statusLabel.setForeground(TEXT);
         }
     }
 }

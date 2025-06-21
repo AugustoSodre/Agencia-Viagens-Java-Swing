@@ -15,12 +15,15 @@ public class CadastrarServico extends JFrame {
     private ServicoController controller = new ServicoController();
     private TelaServico telaServico;
 
-    private static final Color PRIMARY_COLOR = new Color(41, 128, 185);
-    private static final Color SUCCESS_COLOR = new Color(39, 174, 96);
-    private static final Color WARNING_COLOR = new Color(241, 196, 15);
-    private static final Color DANGER_COLOR = new Color(231, 76, 60);
-    private static final Color LIGHT_GRAY = new Color(248, 249, 250);
-    private static final Color DARK_GRAY = new Color(52, 58, 64);
+    // Nova paleta de cores elegante
+    private static final Color PRIMARY = new Color(150, 60, 70);      // #963C46
+    private static final Color SECONDARY = new Color(225, 188, 190);  // #E1BCBE
+    private static final Color BACKGROUND = new Color(255, 245, 238); // #FFF5EE
+    private static final Color TEXT = new Color(45, 45, 45);          // #2D2D2D
+    private static final Color SUCCESS = new Color(71, 191, 145);     // #47BF91
+    private static final Color WARNING = new Color(255, 127, 80);     // #FF7F50
+    private static final Color ERROR = new Color(192, 57, 43);        // #C0392B
+    private static final Color BORDER = new Color(217, 217, 217);         // #D9D9D9
 
     public CadastrarServico(TelaServico telaServico) {
         this.telaServico = telaServico;
@@ -38,7 +41,7 @@ public class CadastrarServico extends JFrame {
     }
 
     private void setupModernUI() {
-        setBackground(LIGHT_GRAY);
+        setBackground(BACKGROUND);
         Font bodyFont = new Font("Segoe UI", Font.PLAIN, 13);
         Font headerFont = new Font("Segoe UI", Font.BOLD, 14);
         UIManager.put("Button.font", bodyFont);
@@ -55,13 +58,13 @@ public class CadastrarServico extends JFrame {
         txtDescricao.setWrapStyleWord(true);
         txtDescricao.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         txtDescricao.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+            BorderFactory.createLineBorder(BORDER, 1, true),
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
 
-        btnSalvar = createModernButton("Salvar", SUCCESS_COLOR, "Salvar o serviço");
-        btnLimpar = createModernButton("Limpar", WARNING_COLOR, "Limpar todos os campos");
-        btnCancelar = createModernButton("Cancelar", DANGER_COLOR, "Cancelar e fechar a janela");
+        btnSalvar = createModernButton("Salvar", SUCCESS, "Salvar o serviço");
+        btnLimpar = createModernButton("Limpar", WARNING, "Limpar todos os campos");
+        btnCancelar = createModernButton("Cancelar", ERROR, "Cancelar e fechar a janela");
 
         Dimension btnSize = new Dimension(120, 36);
         btnSalvar.setPreferredSize(btnSize);
@@ -72,9 +75,9 @@ public class CadastrarServico extends JFrame {
     private JTextField createModernTextField(int columns, String tooltip) {
         JTextField field = new JTextField(columns);
         field.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        field.setForeground(DARK_GRAY);
+        field.setForeground(TEXT);
         field.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+            BorderFactory.createLineBorder(BORDER, 1, true),
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
         field.setPreferredSize(new Dimension(250, 36));
@@ -108,21 +111,21 @@ public class CadastrarServico extends JFrame {
     private void setupLayout() {
         setLayout(new BorderLayout());
         JPanel painelPrincipal = new JPanel(new BorderLayout());
-        painelPrincipal.setBackground(LIGHT_GRAY);
+        painelPrincipal.setBackground(BACKGROUND);
         painelPrincipal.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JPanel painelFormulario = new JPanel(new GridBagLayout());
         painelFormulario.setBackground(Color.WHITE);
         TitledBorder border = new TitledBorder(
             BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(PRIMARY_COLOR, 2, true),
+                BorderFactory.createLineBorder(PRIMARY, 2, true),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)
             ),
             "Dados do Serviço",
             TitledBorder.LEFT,
             TitledBorder.TOP,
             new Font("Segoe UI", Font.BOLD, 16),
-            PRIMARY_COLOR
+            PRIMARY
         );
         painelFormulario.setBorder(border);
 
@@ -146,7 +149,7 @@ public class CadastrarServico extends JFrame {
         painelFormulario.add(new JScrollPane(txtDescricao), gbc);
 
         JPanel painelBotoes = new JPanel();
-        painelBotoes.setBackground(LIGHT_GRAY);
+        painelBotoes.setBackground(BACKGROUND);
         painelBotoes.add(btnSalvar);
         painelBotoes.add(btnLimpar);
         painelBotoes.add(btnCancelar);

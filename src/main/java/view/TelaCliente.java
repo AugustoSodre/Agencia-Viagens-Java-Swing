@@ -48,15 +48,15 @@ public class TelaCliente extends AbstractTela<Object> {
     private JLabel statusLabel;
     private ClienteController clienteController = new ClienteController();
     
-    // Cores modernas
-    private static final Color PRIMARY_COLOR = new Color(41, 128, 185);
-    private static final Color SECONDARY_COLOR = new Color(52, 152, 219);
-    private static final Color SUCCESS_COLOR = new Color(39, 174, 96);
-    private static final Color WARNING_COLOR = new Color(241, 196, 15);
-    private static final Color DANGER_COLOR = new Color(231, 76, 60);
-    private static final Color LIGHT_GRAY = new Color(248, 249, 250);
-    private static final Color DARK_GRAY = new Color(52, 58, 64);
-    private static final Color HOVER_COLOR = new Color(224, 247, 250);
+    // Nova paleta de cores elegante
+    private static final Color PRIMARY = new Color(150, 60, 70);      // #963C46
+    private static final Color SECONDARY = new Color(225, 188, 190);  // #E1BCBE
+    private static final Color BACKGROUND = new Color(255, 245, 238); // #FFF5EE
+    private static final Color TEXT = new Color(45, 45, 45);          // #2D2D2D
+    private static final Color SUCCESS = new Color(71, 191, 145);     // #47BF91
+    private static final Color WARNING = new Color(255, 127, 80);     // #FF7F50
+    private static final Color ERROR = new Color(192, 57, 43);        // #C0392B
+    private static final Color BORDER = new Color(217, 217, 217);         // #D9D9D9
 
     public TelaCliente(MainFrame mainFrame) {
         super("Clientes");
@@ -78,7 +78,7 @@ public class TelaCliente extends AbstractTela<Object> {
     }
 
     private void applyModernTheme() {
-        setBackground(LIGHT_GRAY);
+        setBackground(BACKGROUND);
         
         // Customizar fontes
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
@@ -131,9 +131,9 @@ public class TelaCliente extends AbstractTela<Object> {
     	
         // Cores e estilos modernos
         table.setBackground(Color.WHITE);
-        table.setForeground(DARK_GRAY);
+        table.setForeground(TEXT);
         table.setSelectionBackground(new Color(230, 247, 255));
-        table.setSelectionForeground(DARK_GRAY);
+        table.setSelectionForeground(TEXT);
         table.setGridColor(new Color(230, 230, 230));
         table.setRowHeight(35);
         table.setShowGrid(true);
@@ -144,7 +144,7 @@ public class TelaCliente extends AbstractTela<Object> {
         
         // Header moderno
         JTableHeader header = table.getTableHeader();
-        header.setBackground(PRIMARY_COLOR);
+        header.setBackground(PRIMARY);
         header.setForeground(Color.WHITE);
         header.setFont(new Font("Segoe UI", Font.BOLD, 13));
         header.setPreferredSize(new Dimension(header.getPreferredSize().width, 40));
@@ -175,7 +175,7 @@ public class TelaCliente extends AbstractTela<Object> {
 
     private void animateButtonClick(JButton button) {
         Color originalColor = button.getBackground();
-        button.setBackground(SUCCESS_COLOR.brighter());
+        button.setBackground(SUCCESS.brighter());
         
         Timer timer = new Timer(100, evt -> button.setBackground(originalColor));
         timer.setRepeats(false);
@@ -199,7 +199,7 @@ public class TelaCliente extends AbstractTela<Object> {
 
     @Override
     protected Icon getAddButtonIcon() {
-        return createModernIcon("+", SUCCESS_COLOR);
+        return createModernIcon("+", SUCCESS);
     }
 
     private Icon createModernIcon(String symbol, Color color) {
@@ -235,20 +235,20 @@ public class TelaCliente extends AbstractTela<Object> {
             
             // Feedback visual
             statusLabel.setText("Dados atualizados • " + newModel.getRowCount() + " registros");
-            statusLabel.setForeground(SUCCESS_COLOR);
+            statusLabel.setForeground(SUCCESS);
         });
     }
 
     private void showLoadingIndicator(boolean show) {
         if (show) {
             statusLabel.setText("Carregando dados...");
-            statusLabel.setForeground(PRIMARY_COLOR);
+            statusLabel.setForeground(PRIMARY);
         }
     }
 
     private void addSearchComponents() {
         JPanel searchPanel = getSearchPanel();
-        searchPanel.setBackground(LIGHT_GRAY);
+        searchPanel.setBackground(BACKGROUND);
         
         // Painel principal de busca com design moderno
         JPanel modernSearchPanel = createModernSearchPanel();
@@ -260,7 +260,7 @@ public class TelaCliente extends AbstractTela<Object> {
         // Status label no final
         statusLabel = new JLabel("Carregando...");
         statusLabel.setFont(new Font("Segoe UI", Font.ITALIC, 11));
-        statusLabel.setForeground(DARK_GRAY);
+        statusLabel.setForeground(TEXT);
         searchPanel.add(Box.createHorizontalGlue());
         searchPanel.add(statusLabel);
         searchPanel.add(Box.createHorizontalStrut(15));
@@ -285,8 +285,8 @@ public class TelaCliente extends AbstractTela<Object> {
         idSearchField.setMaximumSize(new Dimension(100, 32));
 
         // Botões modernos
-        idSearchButton = createModernButton("Buscar", PRIMARY_COLOR);
-        refreshButton = createModernButton("Limpar", WARNING_COLOR);
+        idSearchButton = createModernButton("Buscar", PRIMARY);
+        refreshButton = createModernButton("Limpar", WARNING);
 
         // Eventos
         setupSearchEvents();
@@ -322,10 +322,10 @@ public class TelaCliente extends AbstractTela<Object> {
             public void focusGained(FocusEvent e) {
                 if (field.getText().equals("Digite o ID...")) {
                     field.setText("");
-                    field.setForeground(DARK_GRAY);
+                    field.setForeground(TEXT);
                 }
                 field.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(PRIMARY_COLOR, 2),
+                    BorderFactory.createLineBorder(PRIMARY, 2),
                     BorderFactory.createEmptyBorder(4, 8, 4, 8)
                 ));
             }
@@ -405,7 +405,7 @@ public class TelaCliente extends AbstractTela<Object> {
 
         // Mostrar feedback de busca
         statusLabel.setText("Buscando cliente ID " + idText + "...");
-        statusLabel.setForeground(PRIMARY_COLOR);
+        statusLabel.setForeground(PRIMARY);
 
         int id = Integer.parseInt(idText);
         DefaultTableModel model = clienteController.buscarClientePorId(id);
@@ -415,10 +415,10 @@ public class TelaCliente extends AbstractTela<Object> {
             table.setModel(filterModel(model));
             customizeTable(table);
             statusLabel.setText("Cliente encontrado!");
-            statusLabel.setForeground(SUCCESS_COLOR);
+            statusLabel.setForeground(SUCCESS);
         } else {
             statusLabel.setText("Cliente não encontrado");
-            statusLabel.setForeground(DANGER_COLOR);
+            statusLabel.setForeground(ERROR);
             showModernMessage("Nenhum cliente encontrado com o ID " + id,
                             "Busca sem resultados", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -434,7 +434,7 @@ public class TelaCliente extends AbstractTela<Object> {
     private void updateStatusLabel(int recordCount) {
         if (statusLabel != null) {
             statusLabel.setText(recordCount + " cliente" + (recordCount != 1 ? "s" : "") + " encontrado" + (recordCount != 1 ? "s" : ""));
-            statusLabel.setForeground(DARK_GRAY);
+            statusLabel.setForeground(TEXT);
         }
     }
 }
