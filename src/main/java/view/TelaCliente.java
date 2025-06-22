@@ -184,7 +184,7 @@ public class TelaCliente extends AbstractTela<Object> {
 
     @Override
     protected String getAddButtonText() {
-        return "➕ Novo Cliente";
+        return "Novo Cliente";
     }
 
     @Override
@@ -275,10 +275,6 @@ public class TelaCliente extends AbstractTela<Object> {
             BorderFactory.createEmptyBorder(8, 12, 8, 12)
         ));
 
-        // Ícone de busca removido
-        // JLabel searchIcon = new JLabel("🔍");
-        // searchIcon.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
-
         // Campo de busca por ID moderno
         idSearchField = createModernTextField();
         idSearchField.setPreferredSize(new Dimension(100, 32));
@@ -292,8 +288,6 @@ public class TelaCliente extends AbstractTela<Object> {
         setupSearchEvents();
 
         // Layout
-        // panel.add(searchIcon);
-        // panel.add(Box.createHorizontalStrut(8));
         panel.add(new JLabel("ID:"));
         panel.add(Box.createHorizontalStrut(5));
         panel.add(idSearchField);

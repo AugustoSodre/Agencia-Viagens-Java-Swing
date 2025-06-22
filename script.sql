@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS agencia_viagem;
+
 -- Criando BD
 CREATE DATABASE IF NOT EXISTS agencia_viagem;
 USE agencia_viagem;

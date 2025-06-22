@@ -9,7 +9,6 @@ import javax.swing.table.TableCellRenderer;
 
 public class ButtonXRenderer extends JButton implements TableCellRenderer {
 
-
 	public ButtonXRenderer() {
         setText("X");
         setForeground(Color.RED);
